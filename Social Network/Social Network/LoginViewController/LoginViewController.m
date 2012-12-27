@@ -35,16 +35,62 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+#pragma mark - create_account_button_clicked 
 -(IBAction) create_account_button_clicked:(id)sender
 {
     RegistrationViewController*viewController = [[[RegistrationViewController alloc] initWithNibName:@"RegistrationViewController" bundle:nil] autorelease];
     [self.navigationController pushViewController:viewController animated:YES];
 }
+
+#pragma mark - sign_in_button_clicked
+
 -(IBAction) sign_in_button_clicked:(id)sender
 {
+    requestObjects = [NSArray arrayWithObjects:@"login",email_address_textfield.text,password_textfield.text,nil];
+    requestkeys = [NSArray arrayWithObjects:@"action",@"username",@"password",nil];
+   
+    
+    requestJSONDict = [NSDictionary dictionaryWithObjects:requestObjects forKeys:requestkeys];
+    requestString = [NSString stringWithFormat:@"data=%@",[requestJSONDict JSONRepresentation]];
+    NSLog(@"\n \n \n \n \n \n ");
+    
+    NSLog(@"\n requestString = %@",requestString);
+    
+    requestData = [NSData dataWithBytes: [requestString UTF8String] length: [requestString length]];
+    urlString = [NSString stringWithFormat:@"%@",WEB_SERVICE_URL];
+    
+    request = [[[NSMutableURLRequest alloc] init] autorelease];
+    [request setURL:[NSURL URLWithString:urlString]]; // set URL for the request
+    [request setHTTPMethod:@"POST"]; // set method the request
+    
+    [request setHTTPBody:requestData];
+    
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)
+     {
+         NSLog(@"\n response we get = %@",response);
+         returnData = data;
+         NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+         NSLog(@"\n returnString == %@",returnString);
+         json = [[SBJSON new] autorelease];
+         
+         
+         responseDataDictionary = [json objectWithString:returnString error:&error];
+         [responseDataDictionary retain];
+         
+         
+     }];
+
+    
+    
     
 }
+
 -(IBAction) sign_in_using_fb_button_clicked:(id)sender
 {
     if(![AppDelegate hasConnectivity])
@@ -232,8 +278,11 @@
         // information or getting the user's permissions.
         NSLog(@"\n user registered/signup using fb..now we need to ");
         NSLog(@"\n resutl for user = %@",result);
+    
+    /*
         NSUserDefaults*defaults = [NSUserDefaults standardUserDefaults];
         [defaults setObject:result forKey:@"currentUserFBDetail"];
+     */
     
 }
 

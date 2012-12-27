@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "FBConnect.h"
 #import "AppDelegate.h"
-
+#import "SBJSON.h"
 enum
 {
     login_requestGetFaceBookFriend = 10000,
@@ -29,6 +29,23 @@ FBSessionDelegate>
     IBOutlet UITextField*password_textfield;
     
     int requestType;
+    
+    //Webservie Part
+    
+    NSArray *requestObjects;
+	NSArray *requestkeys;
+	NSDictionary *requestJSONDict;
+	NSMutableDictionary *finalJSONDictionary;
+	NSString *jsonRequest;
+	NSString *requestString;
+	NSData *requestData;
+	NSString *urlString;
+	NSMutableURLRequest *request;
+	NSData *returnData;
+	NSError *error;
+	SBJSON *json;
+	NSDictionary *responseDataDictionary;
+    //NSMutableArray *responseDataArray;
     
 }
 

@@ -38,16 +38,58 @@
 
 -(IBAction)signUp_button_clicked:(id)sender
 {
+    NSString*error_string=@"";
     
-    /*
-    requestObjects = [NSArray arrayWithObjects:@"getallchats",[NSNumber numberWithInt:firstUserId],[NSNumber numberWithInt:secondUserId],nil];
-    requestkeys = [NSArray arrayWithObjects:@"action",@"fromuserid",@"touserid",nil];
+    NSString *emailReg = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+	NSPredicate *email_address_check = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailReg];
+    
+    if([[first_name_textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length]==0)
+    {
+        error_string = @"Please enter first name.";
+    }
+    else if([[last_name_textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length]==0)
+    {
+         error_string = @"Please enter last name.";
+    }
+    else if([[email_address_name_textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length]==0 || ([email_address_check evaluateWithObject:email_address_name_textField.text] != YES))
+    {
+        error_string = @"Please enter valid email address.";
+    }
+    else if([[password_textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length]==0)
+    {
+        error_string = @"Please enter password.";
+    }
+    else if([[contact_number_textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length]==0)
+    {
+        error_string = @"Please enter contact number.";
+    }
+    
+    if([error_string length]>0)
+    {
+    
+        UIAlertView*alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:error_string delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alertView show];
+        [alertView release];
+        
+        return;
+    }
+    
+    
+    
+    
+    //user_registration
+    requestObjects = [NSArray arrayWithObjects:@"user_registration",first_name_textField.text,last_name_textField.text,email_address_name_textField.text,password_textField.text,contact_number_textField.text,nil];
+    requestkeys = [NSArray arrayWithObjects:@"action",@"first_name",@"last_name",@"email",@"password",@"contact_no",nil];
+    
     
     requestJSONDict = [NSDictionary dictionaryWithObjects:requestObjects forKeys:requestkeys];
     requestString = [NSString stringWithFormat:@"data=%@",[requestJSONDict JSONRepresentation]];
     NSLog(@"\n \n \n \n \n \n ");
+    
+    NSLog(@"\n requestString = %@",requestString);
+    
     requestData = [NSData dataWithBytes: [requestString UTF8String] length: [requestString length]];
-    urlString = [NSString stringWithFormat:@"%@",SERVER_URL];
+    urlString = [NSString stringWithFormat:@"%@",WEB_SERVICE_URL];
     
     request = [[[NSMutableURLRequest alloc] init] autorelease];
     [request setURL:[NSURL URLWithString:urlString]]; // set URL for the request
@@ -62,21 +104,19 @@
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
     
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)
-    {
-        NSLog(@"\n response we get = %@",response);
-        returnData = data;
-        NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
-        NSLog(@"\n returnString == %@",returnString);
-        json = [[SBJSON new] autorelease];
-        
-        
-        responseDataArray = [json objectWithString:returnString error:&error];
-        [responseDataArray retain];
-        
-        
-    }];
-    
-*/
+     {
+         NSLog(@"\n response we get = %@",response);
+         returnData = data;
+         NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+         NSLog(@"\n returnString == %@",returnString);
+         json = [[SBJSON new] autorelease];
+         
+         
+         responseDataDictionary = [json objectWithString:returnString error:&error];
+         [responseDataDictionary retain];
+         
+         
+     }];
     
     
     

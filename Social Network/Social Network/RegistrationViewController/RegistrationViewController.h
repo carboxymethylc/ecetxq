@@ -33,8 +33,8 @@
 	NSData *returnData;
 	NSError *error;
 	SBJSON *json;
-	//NSDictionary *responseDataDictionary;
-    NSMutableArray *responseDataArray;
+	NSDictionary *responseDataDictionary;
+    //NSMutableArray *responseDataArray;
     
 }
 
