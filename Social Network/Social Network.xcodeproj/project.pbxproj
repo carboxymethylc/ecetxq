@@ -22,6 +22,8 @@
 		465DE731168BEC73006031CB /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 465DE729168BEC73006031CB /* SBJsonBase.m */; };
 		465DE732168BEC73006031CB /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 465DE72B168BEC73006031CB /* SBJsonParser.m */; };
 		465DE733168BEC73006031CB /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 465DE72D168BEC73006031CB /* SBJsonWriter.m */; };
+		466440AE168CB18E0061D524 /* login_screen.png in Resources */ = {isa = PBXBuildFile; fileRef = 466440AD168CB18E0061D524 /* login_screen.png */; };
+		466440B1168CB31A0061D524 /* signup_screen.png in Resources */ = {isa = PBXBuildFile; fileRef = 466440B0168CB31A0061D524 /* signup_screen.png */; };
 		46DEA113167E00F5003F3330 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46DEA112167E00F5003F3330 /* UIKit.framework */; };
 		46DEA115167E00F5003F3330 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46DEA114167E00F5003F3330 /* Foundation.framework */; };
 		46DEA117167E00F5003F3330 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46DEA116167E00F5003F3330 /* CoreGraphics.framework */; };
@@ -50,8 +52,6 @@
 		46DEA1B5167E4294003F3330 /* EGOImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 46DEA1AE167E4294003F3330 /* EGOImageView.m */; };
 		46DEA1BB167E466A003F3330 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46DEA1B8167E466A003F3330 /* DetailViewController.m */; };
 		46DEA1BC167E466A003F3330 /* customCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 46DEA1BA167E466A003F3330 /* customCell.m */; };
-		ED8765AD168C57D5000D78F7 /* IMG_0802.JPG in Resources */ = {isa = PBXBuildFile; fileRef = ED8765AC168C57D5000D78F7 /* IMG_0802.JPG */; };
-		ED8765B0168C57F8000D78F7 /* IMG_0803.JPG in Resources */ = {isa = PBXBuildFile; fileRef = ED8765AF168C57F8000D78F7 /* IMG_0803.JPG */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +83,8 @@
 		465DE72B168BEC73006031CB /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
 		465DE72C168BEC73006031CB /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		465DE72D168BEC73006031CB /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		466440AD168CB18E0061D524 /* login_screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_screen.png; sourceTree = "<group>"; };
+		466440B0168CB31A0061D524 /* signup_screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signup_screen.png; sourceTree = "<group>"; };
 		46DEA10E167E00F5003F3330 /* Social Network.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Social Network.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46DEA112167E00F5003F3330 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		46DEA114167E00F5003F3330 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -150,8 +152,6 @@
 		46DEA1B8167E466A003F3330 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		46DEA1B9167E466A003F3330 /* customCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = customCell.h; sourceTree = "<group>"; };
 		46DEA1BA167E466A003F3330 /* customCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = customCell.m; sourceTree = "<group>"; };
-		ED8765AC168C57D5000D78F7 /* IMG_0802.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = IMG_0802.JPG; path = "Social Network/images/IMG_0802.JPG"; sourceTree = SOURCE_ROOT; };
-		ED8765AF168C57F8000D78F7 /* IMG_0803.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = IMG_0803.JPG; path = "Social Network/images/IMG_0803.JPG"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,7 +177,6 @@
 		4636039A168B745100D09CFA /* LoginViewController */ = {
 			isa = PBXGroup;
 			children = (
-				ED8765AC168C57D5000D78F7 /* IMG_0802.JPG */,
 				4636039B168B746E00D09CFA /* LoginViewController.h */,
 				4636039C168B746E00D09CFA /* LoginViewController.m */,
 				4636039D168B746E00D09CFA /* LoginViewController.xib */,
@@ -198,7 +197,6 @@
 		463603A6168B7B7700D09CFA /* RegistrationViewController */ = {
 			isa = PBXGroup;
 			children = (
-				ED8765AF168C57F8000D78F7 /* IMG_0803.JPG */,
 				463603A7168B7B9000D09CFA /* RegistrationViewController.h */,
 				463603A8168B7B9000D09CFA /* RegistrationViewController.m */,
 				463603A9168B7B9000D09CFA /* RegistrationViewController.xib */,
@@ -357,6 +355,8 @@
 		46DEA17F167E0CCF003F3330 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				466440B0168CB31A0061D524 /* signup_screen.png */,
+				466440AD168CB18E0061D524 /* login_screen.png */,
 				46107F1E167F839B008D42A5 /* login.png */,
 				46009D06167EBFCE00C0C966 /* facebook_header.png */,
 				46009D03167EB98000C0C966 /* facebook_cell_background.png */,
@@ -497,8 +497,8 @@
 				4636039F168B746E00D09CFA /* LoginViewController.xib in Resources */,
 				463603A5168B75E700D09CFA /* MasterViewController.xib in Resources */,
 				463603AB168B7B9000D09CFA /* RegistrationViewController.xib in Resources */,
-				ED8765AD168C57D5000D78F7 /* IMG_0802.JPG in Resources */,
-				ED8765B0168C57F8000D78F7 /* IMG_0803.JPG in Resources */,
+				466440AE168CB18E0061D524 /* login_screen.png in Resources */,
+				466440B1168CB31A0061D524 /* signup_screen.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

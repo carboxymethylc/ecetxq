@@ -27,6 +27,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    registration_scrollview.contentSize = CGSizeMake(320,500);
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -129,6 +130,8 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    registration_scrollview.contentSize = CGSizeMake(320,700);
+    registration_scrollview.contentOffset = CGPointMake(0,120);
     return TRUE;
 }
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -145,10 +148,17 @@
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    
+    registration_scrollview.contentSize = CGSizeMake(320,500);
+    registration_scrollview.contentOffset = CGPointMake(0,0);
+    
     [textField resignFirstResponder];
     return TRUE;
 }
 
-
+-(IBAction)back_button_clicked:(id)sender
+{
+    [self.navigationController popToRootViewControllerAnimated:TRUE];
+}
 
 @end

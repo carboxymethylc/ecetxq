@@ -17,6 +17,12 @@ enum
     
 };
 
+enum
+{
+    email_address_textfield_tag = 2001,
+    password_textfield_tag = 2002,
+};
+
 @interface LoginViewController : UIViewController<UITextFieldDelegate,FBRequestDelegate,
 FBDialogDelegate,
 FBSessionDelegate>
@@ -29,6 +35,8 @@ FBSessionDelegate>
     IBOutlet UITextField*password_textfield;
     
     int requestType;
+    
+    IBOutlet UIScrollView*loginview_scrollview;
     
     //Webservie Part
     

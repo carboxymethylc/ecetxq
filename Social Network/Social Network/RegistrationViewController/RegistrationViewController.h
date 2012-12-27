@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "JSON.h"
+
+enum
+{
+    registration_email_address_textfield_tag = 2001,
+    registration_password_textfield_tag = 2002,
+};
+
 @interface RegistrationViewController : UIViewController<UITextFieldDelegate>
 {
     IBOutlet UITextField*first_name_textField;
@@ -18,7 +25,8 @@
     
     IBOutlet UIButton*signUp_button;
     IBOutlet UIButton*signUp_using_fb_button;
-    
+    IBOutlet UIButton *back_button;
+    IBOutlet UIScrollView *registration_scrollview;
     
     NSArray *requestObjects;
 	NSArray *requestkeys;
@@ -39,5 +47,6 @@
 
 -(IBAction)signUp_button_clicked:(id)sender;
 -(IBAction)signUp_using_fb_button_clicked:(id)sender;
+-(IBAction)back_button_clicked:(id)sender;
 @property(nonatomic,strong)NSMutableArray *responseDataArray;
 @end

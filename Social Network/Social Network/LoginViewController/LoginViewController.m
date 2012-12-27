@@ -27,6 +27,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    loginview_scrollview.contentSize = CGSizeMake(320,500);
+    email_address_textfield.tag = email_address_textfield_tag;
+    password_textfield.tag = password_textfield_tag;
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -46,6 +49,41 @@
 
 -(IBAction) sign_in_button_clicked:(id)sender
 {
+    
+    if(![AppDelegate hasConnectivity])
+    {
+        UIAlertView*alertView = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"Please check your network connection and try again." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        alertView.tag = 5000;
+        [alertView show];
+        [alertView release];
+        return;
+    }
+
+    
+    NSString*error_string=@"";
+    NSString *emailReg = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+	NSPredicate *email_address_check = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailReg];
+    
+    if([[email_address_textfield.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length]==0 || ([email_address_check evaluateWithObject:email_address_textfield.text] != YES))
+    {
+        error_string = @"Please enter valid email address.";
+    }
+   else if([[password_textfield.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length]==0)
+    {
+       error_string = @"Please enter password.";
+    }
+
+    if([error_string length]>0)
+    {
+        
+        UIAlertView*alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:error_string delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alertView show];
+        [alertView release];
+        
+        return;
+    }
+
+    
     requestObjects = [NSArray arrayWithObjects:@"login",email_address_textfield.text,password_textfield.text,nil];
     requestkeys = [NSArray arrayWithObjects:@"action",@"username",@"password",nil];
    
@@ -123,6 +161,12 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    //if(textField.tag == password_textfield_tag)
+    {
+        loginview_scrollview.contentSize = CGSizeMake(320,600);
+        loginview_scrollview.contentOffset = CGPointMake(0,100);
+    }
+    
     return TRUE;
 }
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -139,6 +183,10 @@
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    
+    loginview_scrollview.contentSize = CGSizeMake(320,500);
+    loginview_scrollview.contentOffset = CGPointMake(0,0);
+
     [textField resignFirstResponder];
     return TRUE;
 }
