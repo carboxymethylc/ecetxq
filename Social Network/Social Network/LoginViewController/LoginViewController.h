@@ -9,6 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "FBConnect.h"
 #import "AppDelegate.h"
+
+enum
+{
+    login_requestGetFaceBookFriend = 10000,
+    login_requestGetUserInfotmation = 10001,
+    
+};
+
 @interface LoginViewController : UIViewController<UITextFieldDelegate,FBRequestDelegate,
 FBDialogDelegate,
 FBSessionDelegate>
@@ -20,6 +28,7 @@ FBSessionDelegate>
     IBOutlet UITextField*email_address_textfield;
     IBOutlet UITextField*password_textfield;
     
+    int requestType;
     
 }
 

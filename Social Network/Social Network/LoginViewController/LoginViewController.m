@@ -99,23 +99,6 @@
 
 #pragma mark - FACEBOOK
 
-#pragma mark - requestFaceBookUserFriends //Get current user's friend list
--(void)requestFaceBookUserFriends
-{
-    requestType = requestGetFaceBookFriend;
-    NSString *query = @"SELECT uid,name,first_name,last_name,pic_square FROM user WHERE uid IN (";
-    query = [query stringByAppendingFormat:@"SELECT uid2 FROM friend WHERE uid1 = me())"];
-    NSMutableDictionary * params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                    query, @"query",
-                                    nil];
-    
-    AppDelegate*appDelegate = [UIApplication sharedApplication].delegate;
-    [[appDelegate facebook]  requestWithMethodName: @"fql.query"
-                                         andParams: params
-                                     andHttpMethod: @"POST"
-                                       andDelegate:self];
-}
-
 
 #pragma mark - apiFQLIMe Methods //Get current user info.
 - (void)apiFQLIMe
@@ -126,7 +109,7 @@
     // and since the minimum profile picture size is 180 pixels wide we should be able
     // to get a 100 pixel wide version of the profile picture
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   @"SELECT uid, name, pic FROM user WHERE uid=me()", @"query",
+                                   @"SELECT uid,name,email,pic FROM user WHERE uid=me()", @"query",
                                    nil];
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [[delegate facebook] requestWithMethodName:@"fql.query"
@@ -160,15 +143,12 @@
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     [self storeAuthData:[[delegate facebook] accessToken] expiresAt:[[delegate facebook] expirationDate]];
     
+    //Now we need to get user data here..
+    [self apiFQLIMe];
+   
     
-    DetailViewController*detailViewController = [[[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil] autorelease];
     
-    [self.navigationController pushViewController:detailViewController animated:NO];
-    
-    
-    /*
-     [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(apiFQLIMe) userInfo:nil repeats:FALSE];
-     */
+   
     
     
 }
@@ -243,68 +223,17 @@
  */
 - (void)request:(FBRequest *)request didLoad:(id)result
 {
-    
-    
-    if(requestType == requestGetFaceBookFriend)
-    {
-        if ([result isKindOfClass:[NSArray class]])
-        {
-            //result = [result objectAtIndex:0];
-            NSLog(@"\n resutl = %@",result);
-            
-            
-            
-            NSMutableArray*sortingArray = [[NSMutableArray alloc] init];
-            sortingArray = [NSMutableArray arrayWithArray:result];
-            
-            for(int x = 0; x < [sortingArray count]; x++)
-            {
-                for(int y = x + 1; y < [sortingArray count]; y++)
-                {
-                    
-                    if([[[sortingArray objectAtIndex:x] objectForKey:@"name"] compare:
-                        [[sortingArray objectAtIndex:y] objectForKey:@"name"] options:NSCaseInsensitiveSearch]
-                       == NSOrderedDescending
-                       )
-                    {
-                        NSArray *temp = [sortingArray objectAtIndex:x];
-                        [sortingArray replaceObjectAtIndex:x withObject:[sortingArray objectAtIndex:y]];
-                        [sortingArray replaceObjectAtIndex:y withObject:temp];
-                    }
-                }
-            }
-            
-            
-            NSLog(@"\n allUserArray = %@",sortingArray);
-            
-            
-        }
-        // This callback can be a result of getting the user's basic
-        // information or getting the user's permissions.
-        
-        [self.view setUserInteractionEnabled:TRUE];
-        
-    }
-    else
-    {
+   
         if ([result isKindOfClass:[NSArray class]])
         {
             result = [result objectAtIndex:0];
         }
         // This callback can be a result of getting the user's basic
         // information or getting the user's permissions.
+        NSLog(@"\n user registered/signup using fb..now we need to ");
         NSLog(@"\n resutl for user = %@",result);
-        [self requestFaceBookUserFriends];
-        
         NSUserDefaults*defaults = [NSUserDefaults standardUserDefaults];
         [defaults setObject:result forKey:@"currentUserFBDetail"];
-        
-        
-        //[self getUserListing:[result objectForKey:@"uid"]];
-    }
-    
-    
-    
     
 }
 
