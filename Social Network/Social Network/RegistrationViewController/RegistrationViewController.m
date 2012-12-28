@@ -79,19 +79,20 @@
     
     
     //user_registration
-    requestObjects = [NSArray arrayWithObjects:@"user_registration",first_name_textField.text,last_name_textField.text,email_address_name_textField.text,password_textField.text,contact_number_textField.text,nil];
-    requestkeys = [NSArray arrayWithObjects:@"action",@"first_name",@"last_name",@"email",@"password",@"contact_no",nil];
+    requestObjects = [NSArray arrayWithObjects:first_name_textField.text,last_name_textField.text,email_address_name_textField.text,password_textField.text,contact_number_textField.text,nil];
+    requestkeys = [NSArray arrayWithObjects:@"firstname",@"lastname",@"emailaddress",@"password",@"contactno",nil];
     
     
     requestJSONDict = [NSDictionary dictionaryWithObjects:requestObjects forKeys:requestkeys];
-    requestString = [NSString stringWithFormat:@"data=%@",[requestJSONDict JSONRepresentation]];
+   //requestString = [NSString stringWithFormat:@"data=%@",[requestJSONDict JSONRepresentation]];
+    requestString = [NSString stringWithFormat:@"%@",[requestJSONDict JSONRepresentation]];
     NSLog(@"\n \n \n \n \n \n ");
     
     NSLog(@"\n requestString = %@",requestString);
     
     requestData = [NSData dataWithBytes: [requestString UTF8String] length: [requestString length]];
-    urlString = [NSString stringWithFormat:@"%@",WEB_SERVICE_URL];
-    
+    urlString = [NSString stringWithFormat:@"%@%@",WEB_SERVICE_URL,@"Signup"];
+    NSLog(@"\n urlString = %@",urlString);
     request = [[[NSMutableURLRequest alloc] init] autorelease];
     [request setURL:[NSURL URLWithString:urlString]]; // set URL for the request
     [request setHTTPMethod:@"POST"]; // set method the request
