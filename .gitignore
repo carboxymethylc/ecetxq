@@ -7,27 +7,28 @@
 
 *.DS_Store
 
-SimpleImageFilter/build/
-
-SimpleImageFilter/SimpleImageFilter/build/GPUImage.build/Debug-iphonesimulator/GPUImage.build/GPUImage.hmap
-
-SimpleImageFilter/SimpleImageFilter/build/GPUImage.build/Debug-iphonesimulator/GPUImage.build/GPUImage-project-headers.hmap
-
-SimpleImageFilter/SimpleImageFilter/build/GPUImage.build/Debug-iphonesimulator/GPUImage.build/GPUImage-own-target-headers.hmap
-
-SimpleImageFilter/SimpleImageFilter/build/GPUImage.build/Debug-iphonesimulator/GPUImage.build/GPUImage-all-target-headers.hmap
-
-SimpleImageFilter/SimpleImageFilter.xcodeproj/project.xcworkspace/xcuserdata/CHIRAG.xcuserdatad/UserInterfaceState.xcuserstate
-
-SimpleImageFilter/build/Debug-iphonesimulator/SimpleImageFilter.app.dSYM/Contents/Info.plist
+Social Network/build/
 
 
-SimpleImageFilter/build/Debug-iphonesimulator/.DS_Store
+Social Network/Social Network/build/GPUImage.build/Debug-iphonesimulator/GPUImage.build/GPUImage.hmap
 
-SimpleImageFilter/build/Debug-iphonesimulator/SimpleImageFilter.app/SimpleImageFilter
+Social Network/Social Network/build/GPUImage.build/Debug-iphonesimulator/GPUImage.build/GPUImage-project-headers.hmap
 
-SimpleImageFilter/.DS_Store
+Social Network/Social Network/build/GPUImage.build/Debug-iphonesimulator/GPUImage.build/GPUImage-own-target-headers.hmap
 
-SimpleImageFilter/build/.DS_Store
+Social Network/Social Network/build/GPUImage.build/Debug-iphonesimulator/GPUImage.build/GPUImage-all-target-headers.hmap
+
+Social Network/Social Network.xcodeproj/project.xcworkspace/xcuserdata/CHIRAG.xcuserdatad/UserInterfaceState.xcuserstate
+
+Social Network/build/Debug-iphonesimulator/Social Network.app.dSYM/Contents/Info.plist
+
+
+Social Network/build/Debug-iphonesimulator/.DS_Store
+
+Social Network/build/Debug-iphonesimulator/Social Network.app/Social Network
+
+Social Network/.DS_Store
+
+Social Network/build/.DS_Store
 
 .DS_Store
