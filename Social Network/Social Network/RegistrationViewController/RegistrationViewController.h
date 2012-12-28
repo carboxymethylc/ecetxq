@@ -41,7 +41,7 @@ enum
 	NSError *error;
 	SBJSON *json;
 	NSDictionary *responseDataDictionary;
-    //NSMutableArray *responseDataArray;
+    //NSMutableArray *responseDataArray;//May be needed
     
 }
 
