@@ -12,6 +12,7 @@
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
+			<string>IBUIActivityIndicatorView</string>
 			<string>IBUIButton</string>
 			<string>IBUIImageView</string>
 			<string>IBUIScrollView</string>
@@ -47,7 +48,6 @@
 								<int key="NSvFlags">274</int>
 								<string key="NSFrame">{{20, 20}, {320, 480}}</string>
 								<reference key="NSSuperview" ref="469533956"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="953944446"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -62,7 +62,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{81, 235}, {199, 26}}</string>
 								<reference key="NSSuperview" ref="469533956"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="565790671"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -98,7 +97,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{81, 270}, {199, 26}}</string>
 								<reference key="NSSuperview" ref="469533956"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="598354024"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -125,7 +123,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{81, 305}, {199, 26}}</string>
 								<reference key="NSSuperview" ref="469533956"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="15229272"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -153,7 +150,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{81, 340}, {199, 26}}</string>
 								<reference key="NSSuperview" ref="469533956"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="963685457"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -181,7 +177,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{81, 375}, {199, 26}}</string>
 								<reference key="NSSuperview" ref="469533956"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="677871627"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -209,7 +204,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{154, 423}, {56, 29}}</string>
 								<reference key="NSSuperview" ref="469533956"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="810269216"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -243,8 +237,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{105, 468}, {154, 25}}</string>
 								<reference key="NSSuperview" ref="469533956"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -264,7 +256,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{64, 170}, {56, 23}}</string>
 								<reference key="NSSuperview" ref="469533956"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="26900726"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -280,10 +271,21 @@
 								<reference key="IBUIFontDescription" ref="403865267"/>
 								<reference key="IBUIFont" ref="520431622"/>
 							</object>
+							<object class="IBUIActivityIndicatorView" id="508935644">
+								<reference key="NSNextResponder" ref="469533956"/>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{162, 264}, {37, 37}}</string>
+								<reference key="NSSuperview" ref="469533956"/>
+								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<bool key="IBUIOpaque">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<bool key="IBUIHidesWhenStopped">NO</bool>
+								<bool key="IBUIAnimating">YES</bool>
+								<int key="IBUIStyle">0</int>
+							</object>
 						</array>
 						<string key="NSFrame">{{-20, -20}, {360, 520}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="876167574"/>
 						<string key="NSReuseIdentifierKey">_NS:10</string>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -293,7 +295,6 @@
 				</array>
 				<string key="NSFrameSize">{320, 480}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="469533956"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -404,6 +405,14 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">process_activity_indicator</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="508935644"/>
+					</object>
+					<int key="connectionID">62</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="26900726"/>
 						<reference key="destination" ref="372490531"/>
@@ -510,6 +519,7 @@
 							<reference ref="565790671"/>
 							<reference ref="26900726"/>
 							<reference ref="876167574"/>
+							<reference ref="508935644"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -558,6 +568,11 @@
 						<reference key="object" ref="953944446"/>
 						<reference key="parent" ref="469533956"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">61</int>
+						<reference key="object" ref="508935644"/>
+						<reference key="parent" ref="469533956"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -575,13 +590,14 @@
 				<string key="40.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="56.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="57.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="61.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="9.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">60</int>
+			<int key="maxID">62</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -614,6 +630,7 @@
 						<string key="first_name_textField">UITextField</string>
 						<string key="last_name_textField">UITextField</string>
 						<string key="password_textField">UITextField</string>
+						<string key="process_activity_indicator">UIActivityIndicatorView</string>
 						<string key="registration_scrollview">UIScrollView</string>
 						<string key="signUp_button">UIButton</string>
 						<string key="signUp_using_fb_button">UIButton</string>
@@ -642,6 +659,10 @@
 						<object class="IBToOneOutletInfo" key="password_textField">
 							<string key="name">password_textField</string>
 							<string key="candidateClassName">UITextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="process_activity_indicator">
+							<string key="name">process_activity_indicator</string>
+							<string key="candidateClassName">UIActivityIndicatorView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="registration_scrollview">
 							<string key="name">registration_scrollview</string>

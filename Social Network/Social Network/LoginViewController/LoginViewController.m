@@ -30,6 +30,10 @@
     loginview_scrollview.contentSize = CGSizeMake(320,500);
     email_address_textfield.tag = email_address_textfield_tag;
     password_textfield.tag = password_textfield_tag;
+    
+    [process_activity_indicator stopAnimating];
+    process_activity_indicator.hidden = TRUE;
+    
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -84,23 +88,28 @@
     }
 
     
+    loginview_scrollview.contentSize = CGSizeMake(320,500);
+    loginview_scrollview.contentOffset = CGPointMake(0,0);
+    
+    
     requestObjects = [NSArray arrayWithObjects:@"login",email_address_textfield.text,password_textfield.text,nil];
-    requestkeys = [NSArray arrayWithObjects:@"action",@"username",@"password",nil];
+    requestkeys = [NSArray arrayWithObjects:@"action",@"emailaddress",@"password",nil];
    
     
     requestJSONDict = [NSDictionary dictionaryWithObjects:requestObjects forKeys:requestkeys];
-    requestString = [NSString stringWithFormat:@"data=%@",[requestJSONDict JSONRepresentation]];
+    //requestString = [NSString stringWithFormat:@"data=%@",[requestJSONDict JSONRepresentation]];
+    requestString = [NSString stringWithFormat:@"%@",[requestJSONDict JSONRepresentation]];
     NSLog(@"\n \n \n \n \n \n ");
     
     NSLog(@"\n requestString = %@",requestString);
     
     requestData = [NSData dataWithBytes: [requestString UTF8String] length: [requestString length]];
-    urlString = [NSString stringWithFormat:@"%@",WEB_SERVICE_URL];
+    urlString = [NSString stringWithFormat:@"%@Login",WEB_SERVICE_URL];
     
     request = [[[NSMutableURLRequest alloc] init] autorelease];
     [request setURL:[NSURL URLWithString:urlString]]; // set URL for the request
     [request setHTTPMethod:@"POST"]; // set method the request
-    
+    [request addValue: @"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:requestData];
     
     
@@ -108,6 +117,11 @@
     
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    
+    process_activity_indicator.hidden = FALSE;
+    [process_activity_indicator startAnimating];
+    [self.view endEditing:TRUE];
+    [self.view setUserInteractionEnabled:FALSE];
     
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)
      {
@@ -119,7 +133,17 @@
          
          
          responseDataDictionary = [json objectWithString:returnString error:&error];
+         NSLog(@"\n responseDataDictionary = %@",responseDataDictionary);
          [responseDataDictionary retain];
+         
+         
+         
+         [self performSelectorOnMainThread:@selector(enable_user_interaction) withObject:nil waitUntilDone:TRUE];
+         
+         
+         
+         
+         
          
          
      }];
@@ -128,7 +152,19 @@
     
     
 }
-
+-(void)enable_user_interaction
+{
+    NSLog(@"\n data = %@",[[responseDataDictionary objectForKey:@"d"] objectAtIndex:0]);
+    
+    [process_activity_indicator stopAnimating];
+    process_activity_indicator.hidden = TRUE;
+    
+    UIAlertView*alertView = [[UIAlertView alloc] initWithTitle:@"Alert" message:[[[responseDataDictionary objectForKey:@"d"] objectAtIndex:0] objectForKey:@"message"] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+    [alertView show];
+    [alertView release];
+    
+    [self.view setUserInteractionEnabled:TRUE];
+}
 -(IBAction) sign_in_using_fb_button_clicked:(id)sender
 {
     if(![AppDelegate hasConnectivity])

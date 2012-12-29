@@ -43,6 +43,8 @@ enum
 	NSDictionary *responseDataDictionary;
     //NSMutableArray *responseDataArray;//May be needed
     
+    IBOutlet UIActivityIndicatorView*process_activity_indicator;
+    
 }
 
 -(IBAction)signUp_button_clicked:(id)sender;

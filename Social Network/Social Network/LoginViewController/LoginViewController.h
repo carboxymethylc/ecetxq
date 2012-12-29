@@ -55,6 +55,9 @@ FBSessionDelegate>
 	NSDictionary *responseDataDictionary;
     //NSMutableArray *responseDataArray;
     
+    
+    IBOutlet UIActivityIndicatorView*process_activity_indicator;
+    
 }
 
 

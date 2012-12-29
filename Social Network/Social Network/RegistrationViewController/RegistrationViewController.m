@@ -27,10 +27,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    registration_scrollview.contentSize = CGSizeMake(320,500);
+    
     // Do any additional setup after loading the view from its nib.
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    
+    registration_scrollview.contentSize = CGSizeMake(320,500);
+    [process_activity_indicator stopAnimating];
+    process_activity_indicator.hidden = TRUE;
 
+    
+    [super viewWillAppear:animated];
+    
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -76,7 +86,9 @@
     }
     
     
-    
+    registration_scrollview.contentSize = CGSizeMake(320,500);
+    registration_scrollview.contentOffset = CGPointMake(0,0);
+
     
     //user_registration
     requestObjects = [NSArray arrayWithObjects:first_name_textField.text,last_name_textField.text,email_address_name_textField.text,password_textField.text,contact_number_textField.text,nil];
@@ -96,9 +108,17 @@
     request = [[[NSMutableURLRequest alloc] init] autorelease];
     [request setURL:[NSURL URLWithString:urlString]]; // set URL for the request
     [request setHTTPMethod:@"POST"]; // set method the request
+     [request addValue: @"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     
     [request setHTTPBody:requestData];
     
+    
+    
+    process_activity_indicator.hidden = FALSE;
+    [process_activity_indicator startAnimating];
+    [self.view endEditing:TRUE];
+    [self.view setUserInteractionEnabled:FALSE];
+
     
     NSURL *url = [NSURL URLWithString:urlString];
     
@@ -117,12 +137,36 @@
          responseDataDictionary = [json objectWithString:returnString error:&error];
          [responseDataDictionary retain];
          
+         NSLog(@"\n responseDataDictionary = %@",responseDataDictionary);
+         
+          NSLog(@"\n data = %@",[[responseDataDictionary objectForKey:@"d"] objectAtIndex:0]);
+         [self performSelectorOnMainThread:@selector(enable_user_interaction) withObject:nil waitUntilDone:TRUE];
+
+         
          
      }];
     
     
     
 }
+
+-(void)enable_user_interaction
+{
+    
+    [process_activity_indicator stopAnimating];
+    process_activity_indicator.hidden = TRUE;
+
+    
+    NSLog(@"\n data = %@",[[responseDataDictionary objectForKey:@"d"] objectAtIndex:0]);
+    
+    UIAlertView*alertView = [[UIAlertView alloc] initWithTitle:@"Alert" message:[[[responseDataDictionary objectForKey:@"d"] objectAtIndex:0] objectForKey:@"message"] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+    [alertView show];
+    [alertView release];
+    
+    [self.view setUserInteractionEnabled:TRUE];
+}
+
+
 -(IBAction)signUp_using_fb_button_clicked:(id)sender
 {
     
