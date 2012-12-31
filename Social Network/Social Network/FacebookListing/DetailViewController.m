@@ -9,6 +9,7 @@
 #import "DetailViewController.h"
 #import "EGOCache.h"
 #import "customCell.h"
+#import <AddressBook/AddressBook.h>
 
 @interface DetailViewController ()
 - (void)configureView;
@@ -30,6 +31,9 @@
     [super viewDidLoad];
 	
     app_delegate = [UIApplication sharedApplication].delegate;
+    
+    [self getContactsFromAddressBook];
+    
     
    // facebook_friends_tableview.tableHeaderView = facebook_friends_tableview_header_view;
     [app_delegate facebook].sessionDelegate = self;
@@ -65,12 +69,31 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return facebook_friends_tableview_header_view;
+    
+    if(section==0)
+    {
+        return contacts_tableview_header_view;
+    }
+    else if(section==1)
+    {
+        return facebook_friends_tableview_header_view;
+    }
+    return nil;
+    
 }
 
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    if(app_delegate.user_signed_in_with==2)
+    {
+        return 2;
+    }
+    else
+    {
+        return 1;
+    }
+
 }
 
 
@@ -79,7 +102,27 @@
 {
    // return flickrPhotos.count;
     
-    return [app_delegate.facebook_user_array count];
+    switch (section)
+    {
+        case 0:
+        {
+            return [app_delegate.device_contact_user_array count];
+            break;
+        }
+        case 1:
+        {
+            return [app_delegate.facebook_user_array count];
+            break;
+        }
+        default:
+        {
+            break;
+        }
+    
+    }
+return  0;
+
+    
 }
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -87,6 +130,7 @@
     static NSString *CellIdentifier = @"ExampleCell";
     
     
+        
     
     customCell *cell = (customCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     //if (cell == nil)
@@ -94,43 +138,161 @@
         cell = [[[customCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
+    
+    if(indexPath.section==0)
+    {
+        
+        cell.contact_imageView.image = [[app_delegate.device_contact_user_array objectAtIndex: indexPath.row] objectForKey:@"thumbImage"];
+        
+        cell.backgroundView =
+        [[[UIImageView alloc] init] autorelease];
+        
+        ((UIImageView *)cell.backgroundView).image = [UIImage imageNamed:@"facebook_cell_background.png"];
+        cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"facebook_cell_background.png"]];
+        
+        cell.name_label.backgroundColor = [UIColor clearColor];
+        
+        NSString*full_name = [NSString stringWithFormat:@"%@ %@",[[app_delegate.device_contact_user_array objectAtIndex: indexPath.row] objectForKey:@"firstName"],[[app_delegate.device_contact_user_array objectAtIndex: indexPath.row] objectForKey:@"lastName"]];
+        
+        cell.name_label.text = full_name;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    else if(indexPath.section==1)
+    {
+        [cell setFlickrPhoto:[[app_delegate.facebook_user_array objectAtIndex:indexPath.row] objectForKey:@"pic_square"]];
+        
+        cell.backgroundView =
+        [[[UIImageView alloc] init] autorelease];
+        
+        ((UIImageView *)cell.backgroundView).image = [UIImage imageNamed:@"facebook_cell_background.png"];
+        cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"facebook_cell_background.png"]];
+        
+        cell.name_label.backgroundColor = [UIColor clearColor];
+        cell.name_label.text = [[app_delegate.facebook_user_array objectAtIndex:indexPath.row] objectForKey:@"name"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    
 	// Configure the cell.
-	[cell setFlickrPhoto:[[app_delegate.facebook_user_array objectAtIndex:indexPath.row] objectForKey:@"pic_square"]];
-    
-    cell.backgroundView =
-    [[[UIImageView alloc] init] autorelease];
-    
-    ((UIImageView *)cell.backgroundView).image = [UIImage imageNamed:@"facebook_cell_background.png"];
-    cell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"facebook_cell_background.png"]];
-    
-    cell.name_label.backgroundColor = [UIColor clearColor];
-    cell.name_label.text = [[app_delegate.facebook_user_array objectAtIndex:indexPath.row] objectForKey:@"name"];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+	
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 {
     
-    NSString* fb_user_id = [NSString stringWithFormat:@"%@",[[app_delegate.facebook_user_array objectAtIndex:indexPath.row] objectForKey:@"uid"]];
+    if(indexPath.section ==0)
+    {
+        MFMessageComposeViewController *controller = [[[MFMessageComposeViewController alloc] init] autorelease];
+        if([MFMessageComposeViewController canSendText])
+        {
+            controller.body = @"I am Using Social Network for IOS.";
+            controller.recipients = [NSArray arrayWithObjects:@"1(234)567-8910", nil];
+            controller.messageComposeDelegate = self;
+            [self presentModalViewController:controller animated:YES];
+        }
+    }
+    else if(indexPath.section ==1)
+    {
+        NSString* fb_user_id = [NSString stringWithFormat:@"%@",[[app_delegate.facebook_user_array objectAtIndex:indexPath.row] objectForKey:@"uid"]];
+        
+        NSLog(@"\n fb_user_id = %@",fb_user_id);
+        
+        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                       fb_user_id, @"to",
+                                       @"I am Using Social Network for IOS", @"name",
+                                       @"Social Network for iOS.", @"caption",
+                                       @"Let's use Social Network to communicate...", @"description",
+                                       @"http://www.google.co.in/",@"link",
+                                       @"http://mascotp.com/temp_upload/social_network/logo_75.png", @"picture",
+                                       nil];
+        
+        
+        
+        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        [[delegate facebook] dialog:@"feed"
+                          andParams:params
+                        andDelegate:self];
+
+    }
     
-    NSLog(@"\n fb_user_id = %@",fb_user_id);
+}
+
+
+
+#pragma mark - getUserWhoInstalledMessangerFromContact
+-(void)getContactsFromAddressBook
+{
+    [app_delegate.device_contact_user_array removeAllObjects];
     
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   fb_user_id, @"to",
-                                   @"I am Using Social Network for IOS", @"name",
-                                   @"Social Network for iOS.", @"caption",
-                                   @"Let's use Social Network to communicate...", @"description",
-                                   @"http://www.google.co.in/",@"link",
-                                   @"http://mascotp.com/temp_upload/social_network/logo_75.png", @"picture",
-                                   nil];
+    ABAddressBookRef addressBook = ABAddressBookCreate( );
+    //NSArray *allPeople = (NSArray *)ABAddressBookCopyPeopleWithName(addressBook, CFSTR("Appleseed"));
+
+    
+    CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( addressBook );
+    
+    
+    CFIndex nPeople = ABAddressBookGetPersonCount( addressBook );
+    
+    NSLog(@"\n allPeople = %@",allPeople);
+    NSLog(@"\n nPeople = %ld",nPeople);
+    
+    
+    NSMutableArray *data = [(NSArray *) allPeople mutableCopy];
+    
+    NSMutableDictionary*addressDictionary;
+    for ( int i = 0; i < nPeople; i++ )
+    {
+        addressDictionary = [[NSMutableDictionary alloc] init];
+        
+        if((ABRecordCopyValue([data objectAtIndex:i], kABPersonFirstNameProperty))!=nil)
+        {
+            [addressDictionary setObject:(ABRecordCopyValue([data objectAtIndex:i], kABPersonFirstNameProperty)) forKey:@"firstName"];
+        }
+        
+        if((ABRecordCopyValue([data objectAtIndex:i], kABPersonLastNameProperty))!=nil)
+        {
+            [addressDictionary setObject:(ABRecordCopyValue([data objectAtIndex:i], kABPersonLastNameProperty)) forKey:@"lastName"];
+        }
+        
+        ABMultiValueRef phoneNumberProperty = (ABRecordCopyValue([data objectAtIndex:i], kABPersonPhoneProperty));
+        NSArray* phoneNumbers = (NSArray*)ABMultiValueCopyArrayOfAllValues(phoneNumberProperty);
+        CFRelease(phoneNumberProperty);
+        
+        // Do whatever you want with the phone numbers
+        
+        NSLog(@"Phone numbers = %@", phoneNumbers);
+        if(phoneNumbers != nil)
+        {
+            [addressDictionary setObject:phoneNumbers forKey:@"phoneNumber"];
+        }
+        
+        
+        [phoneNumbers release];
+        NSData  *imgData = (NSData *)ABPersonCopyImageData([data objectAtIndex:i]);
+        UIImage  *img = [UIImage imageWithData:imgData];
+        if(img != nil)
+        {
+            
+            [addressDictionary setObject:img forKey:@"thumbImage"];
+        }
+        [app_delegate.device_contact_user_array addObject:addressDictionary];
+        
+        [addressDictionary release];
+        
+    }
+    
+    
+    NSLog(@"allContactsArray  BEFORE == %@",app_delegate.device_contact_user_array);
+	NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName"
+																	 ascending:YES
+																	comparator:^(id obj1, id obj2) {
+																		return [obj1 compare:obj2 options:NSNumericSearch];
+																	}];
+	[app_delegate.device_contact_user_array sortUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    NSLog(@"allContactsArray  AFTER == %@",app_delegate.device_contact_user_array);
     
     
     
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [[delegate facebook] dialog:@"feed"
-                      andParams:params
-                    andDelegate:self];
 }
 
 //Facebook starts

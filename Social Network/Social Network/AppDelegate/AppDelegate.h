@@ -14,6 +14,9 @@
     NSUserDefaults *user_defaults;
     
     NSMutableArray*facebook_user_array;
+    NSMutableArray*device_contact_user_array;
+    
+    int user_signed_in_with;//1 db 2 = Facebook.
     
 }
 
@@ -23,6 +26,11 @@
 @property (nonatomic, retain) Facebook *facebook;
 @property (nonatomic, retain) NSMutableDictionary *userPermissions;
 @property(nonatomic,retain) NSMutableArray*facebook_user_array;
+@property(nonatomic,retain) NSMutableArray*device_contact_user_array;
+@property(nonatomic,readwrite) int user_signed_in_with;
+
+
+
 
 +(BOOL)hasConnectivity;
 @end

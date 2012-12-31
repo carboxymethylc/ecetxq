@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		46009D04167EB98000C0C966 /* facebook_cell_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 46009D03167EB98000C0C966 /* facebook_cell_background.png */; };
 		46009D07167EBFCE00C0C966 /* facebook_header.png in Resources */ = {isa = PBXBuildFile; fileRef = 46009D06167EBFCE00C0C966 /* facebook_header.png */; };
+		460BB46F16910E0100BFCEC6 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 460BB46E16910E0100BFCEC6 /* AddressBook.framework */; };
+		460BB47216911F3100BFCEC6 /* contacts.png in Resources */ = {isa = PBXBuildFile; fileRef = 460BB47116911F3100BFCEC6 /* contacts.png */; };
+		460BB4741691289300BFCEC6 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 460BB4731691289300BFCEC6 /* MessageUI.framework */; };
 		46107F1F167F839B008D42A5 /* login.png in Resources */ = {isa = PBXBuildFile; fileRef = 46107F1E167F839B008D42A5 /* login.png */; };
 		4636039E168B746E00D09CFA /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4636039C168B746E00D09CFA /* LoginViewController.m */; };
 		4636039F168B746E00D09CFA /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4636039D168B746E00D09CFA /* LoginViewController.xib */; };
@@ -57,6 +60,9 @@
 /* Begin PBXFileReference section */
 		46009D03167EB98000C0C966 /* facebook_cell_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_cell_background.png; sourceTree = "<group>"; };
 		46009D06167EBFCE00C0C966 /* facebook_header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_header.png; sourceTree = "<group>"; };
+		460BB46E16910E0100BFCEC6 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		460BB47116911F3100BFCEC6 /* contacts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = contacts.png; sourceTree = "<group>"; };
+		460BB4731691289300BFCEC6 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		46107F1E167F839B008D42A5 /* login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login.png; sourceTree = "<group>"; };
 		4636039B168B746E00D09CFA /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		4636039C168B746E00D09CFA /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
@@ -159,6 +165,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				460BB4741691289300BFCEC6 /* MessageUI.framework in Frameworks */,
+				460BB46F16910E0100BFCEC6 /* AddressBook.framework in Frameworks */,
 				46DEA17E167E08D3003F3330 /* libsqlite3.0.dylib in Frameworks */,
 				46DEA17C167E08C3003F3330 /* AdSupport.framework in Frameworks */,
 				46DEA17A167E08BE003F3330 /* Social.framework in Frameworks */,
@@ -227,6 +235,8 @@
 		46DEA103167E00F5003F3330 = {
 			isa = PBXGroup;
 			children = (
+				460BB4731691289300BFCEC6 /* MessageUI.framework */,
+				460BB46E16910E0100BFCEC6 /* AddressBook.framework */,
 				46DEA17D167E08D3003F3330 /* libsqlite3.0.dylib */,
 				46DEA17B167E08C3003F3330 /* AdSupport.framework */,
 				46DEA179167E08BE003F3330 /* Social.framework */,
@@ -355,6 +365,7 @@
 		46DEA17F167E0CCF003F3330 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				460BB47116911F3100BFCEC6 /* contacts.png */,
 				466440B0168CB31A0061D524 /* signup_screen.png */,
 				466440AD168CB18E0061D524 /* login_screen.png */,
 				46107F1E167F839B008D42A5 /* login.png */,
@@ -499,6 +510,7 @@
 				463603AB168B7B9000D09CFA /* RegistrationViewController.xib in Resources */,
 				466440AE168CB18E0061D524 /* login_screen.png in Resources */,
 				466440B1168CB31A0061D524 /* signup_screen.png in Resources */,
+				460BB47216911F3100BFCEC6 /* contacts.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

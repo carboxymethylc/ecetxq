@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "FBConnect.h"
 #import "AppDelegate.h"
-
+#import <MessageUI/MessageUI.h>
 
 enum
 {
@@ -20,7 +20,7 @@ enum
 
 @interface DetailViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,FBRequestDelegate,
 FBDialogDelegate,
-FBSessionDelegate>
+FBSessionDelegate,MFMessageComposeViewControllerDelegate>
 {
     
     IBOutlet UITableView*facebook_friends_tableview;
@@ -28,9 +28,10 @@ FBSessionDelegate>
     AppDelegate*app_delegate;
     
     IBOutlet UIView*facebook_friends_tableview_header_view;
+    IBOutlet UIView*contacts_tableview_header_view;
     
 }
 -(void)requestFaceBookUserFriends;
-
+-(void)getContactsFromAddressBook;
 
 @end

@@ -18,8 +18,8 @@
 static NSString* kAppId = @"513839955317354";
 @synthesize facebook;
 @synthesize userPermissions;
-@synthesize facebook_user_array;
-
+@synthesize facebook_user_array,device_contact_user_array;
+@synthesize user_signed_in_with;
 - (void)dealloc
 {
     [_window release];
@@ -48,6 +48,7 @@ static NSString* kAppId = @"513839955317354";
     //Facebook coding starts
     
     facebook_user_array = [[NSMutableArray alloc] init];
+    device_contact_user_array   = [[NSMutableArray alloc] init];
     
     facebook = [[Facebook alloc] initWithAppId:kAppId andDelegate:viewController];
     
@@ -214,5 +215,8 @@ static NSString* kAppId = @"513839955317354";
 {
     return [self.facebook handleOpenURL:url];
 }
+
+
+
 
 @end

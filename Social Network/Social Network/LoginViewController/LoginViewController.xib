@@ -48,7 +48,6 @@
 								<int key="NSvFlags">274</int>
 								<string key="NSFrame">{{20, 20}, {320, 480}}</string>
 								<reference key="NSSuperview" ref="173133812"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="551196147"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -63,7 +62,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{81, 248}, {195, 28}}</string>
 								<reference key="NSSuperview" ref="173133812"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="458761628"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -100,7 +98,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{81, 284}, {195, 29}}</string>
 								<reference key="NSSuperview" ref="173133812"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="694635426"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -128,7 +125,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{156, 343}, {51, 31}}</string>
 								<reference key="NSSuperview" ref="173133812"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="1001562982"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -162,7 +158,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{110, 406}, {148, 27}}</string>
 								<reference key="NSSuperview" ref="173133812"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -183,7 +178,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{207, 183}, {94, 30}}</string>
 								<reference key="NSSuperview" ref="173133812"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="800802052"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -204,7 +198,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{161, 255}, {37, 37}}</string>
 								<reference key="NSSuperview" ref="173133812"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="1036297060"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -220,7 +213,6 @@
 						</array>
 						<string key="NSFrame">{{-20, -20}, {360, 520}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="371694142"/>
 						<string key="NSReuseIdentifierKey">_NS:10</string>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -230,7 +222,6 @@
 				</array>
 				<string key="NSFrameSize">{320, 480}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="173133812"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -466,76 +457,7 @@
 			<nil key="sourceID"/>
 			<int key="maxID">25</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes">
-			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
-				<object class="IBPartialClassDescription">
-					<string key="className">LoginViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="create_account_button_clicked:">id</string>
-						<string key="sign_in_button_clicked:">id</string>
-						<string key="sign_in_using_fb_button_clicked:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="create_account_button_clicked:">
-							<string key="name">create_account_button_clicked:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="sign_in_button_clicked:">
-							<string key="name">sign_in_button_clicked:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="sign_in_using_fb_button_clicked:">
-							<string key="name">sign_in_using_fb_button_clicked:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="create_account_button">UIButton</string>
-						<string key="email_address_textfield">UITextField</string>
-						<string key="loginview_scrollview">UIScrollView</string>
-						<string key="password_textfield">UITextField</string>
-						<string key="process_activity_indicator">UIActivityIndicatorView</string>
-						<string key="sign_in_button">UIButton</string>
-						<string key="sign_in_using_fb_button">UIButton</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="create_account_button">
-							<string key="name">create_account_button</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="email_address_textfield">
-							<string key="name">email_address_textfield</string>
-							<string key="candidateClassName">UITextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="loginview_scrollview">
-							<string key="name">loginview_scrollview</string>
-							<string key="candidateClassName">UIScrollView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="password_textfield">
-							<string key="name">password_textfield</string>
-							<string key="candidateClassName">UITextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="process_activity_indicator">
-							<string key="name">process_activity_indicator</string>
-							<string key="candidateClassName">UIActivityIndicatorView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="sign_in_button">
-							<string key="name">sign_in_button</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="sign_in_using_fb_button">
-							<string key="name">sign_in_using_fb_button</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-					</dictionary>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/LoginViewController.h</string>
-					</object>
-				</object>
-			</array>
-		</object>
+		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "JSON.h"
+#import "AppDelegate.h"
+#import "DetailViewController.h"
 
 enum
 {
@@ -15,7 +17,9 @@ enum
     registration_password_textfield_tag = 2002,
 };
 
-@interface RegistrationViewController : UIViewController<UITextFieldDelegate>
+@interface RegistrationViewController : UIViewController<UITextFieldDelegate,FBRequestDelegate,
+FBDialogDelegate,
+FBSessionDelegate>
 {
     IBOutlet UITextField*first_name_textField;
     IBOutlet UITextField*last_name_textField;
@@ -44,6 +48,7 @@ enum
     //NSMutableArray *responseDataArray;//May be needed
     
     IBOutlet UIActivityIndicatorView*process_activity_indicator;
+    AppDelegate*app_delegate;
     
 }
 

@@ -8,6 +8,8 @@
 
 #import "LoginViewController.h"
 #import "RegistrationViewController.h"
+#import "DetailViewController.h"
+#import <AddressBook/AddressBook.h>
 @interface LoginViewController ()
 
 @end
@@ -27,6 +29,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    app_delegate = [UIApplication sharedApplication].delegate;
+    
     loginview_scrollview.contentSize = CGSizeMake(320,500);
     email_address_textfield.tag = email_address_textfield_tag;
     password_textfield.tag = password_textfield_tag;
@@ -159,9 +163,23 @@
     [process_activity_indicator stopAnimating];
     process_activity_indicator.hidden = TRUE;
     
-    UIAlertView*alertView = [[UIAlertView alloc] initWithTitle:@"Alert" message:[[[responseDataDictionary objectForKey:@"d"] objectAtIndex:0] objectForKey:@"message"] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-    [alertView show];
-    [alertView release];
+    if([[[[responseDataDictionary objectForKey:@"d"] objectAtIndex:0] objectForKey:@"status"] intValue]==1)
+    {
+        app_delegate.user_signed_in_with = 1;
+        
+        
+        DetailViewController*view_controller = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
+        [self.navigationController pushViewController:view_controller animated:NO];
+        [view_controller release];
+    }
+    else
+    {
+        UIAlertView*alertView = [[UIAlertView alloc] initWithTitle:@"Alert" message:[[[responseDataDictionary objectForKey:@"d"] objectAtIndex:0] objectForKey:@"message"] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alertView show];
+        [alertView release];
+    }
+    
+    
     
     [self.view setUserInteractionEnabled:TRUE];
 }
@@ -189,6 +207,15 @@
     else
     {
         // [self requestFaceBookUserFriends];
+        
+        app_delegate.user_signed_in_with = 2;
+        
+        
+        DetailViewController*view_controller = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
+        [self.navigationController pushViewController:view_controller animated:NO];
+        [view_controller release];
+
+        
     }
 
 }
@@ -363,6 +390,13 @@
         NSLog(@"\n user registered/signup using fb..now we need to ");
         NSLog(@"\n resutl for user = %@",result);
     
+    app_delegate.user_signed_in_with = 2;
+    
+    
+    DetailViewController*view_controller = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
+    [self.navigationController pushViewController:view_controller animated:NO];
+    [view_controller release];
+    
     /*
         NSUserDefaults*defaults = [NSUserDefaults standardUserDefaults];
         [defaults setObject:result forKey:@"currentUserFBDetail"];
@@ -385,4 +419,8 @@
 }
 
 #pragma mark -
+
+
+
+
 @end

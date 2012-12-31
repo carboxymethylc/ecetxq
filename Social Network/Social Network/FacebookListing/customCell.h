@@ -12,6 +12,7 @@
 @interface customCell : UITableViewCell
 {
     UILabel*name_label;
+    UIImageView*contact_imageView;
 @private
 	EGOImageView* imageView;
     
@@ -19,4 +20,6 @@
 
 - (void)setFlickrPhoto:(NSString*)flickrPhoto;
 @property(nonatomic,retain)UILabel*name_label;
+@property(nonatomic,retain)UIImageView*contact_imageView;
+
 @end

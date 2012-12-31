@@ -58,6 +58,8 @@ FBSessionDelegate>
     
     IBOutlet UIActivityIndicatorView*process_activity_indicator;
     
+    AppDelegate*app_delegate;
+    
 }
 
 
