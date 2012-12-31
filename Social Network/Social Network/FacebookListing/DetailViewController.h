@@ -33,5 +33,5 @@ FBSessionDelegate,MFMessageComposeViewControllerDelegate>
 }
 -(void)requestFaceBookUserFriends;
 -(void)getContactsFromAddressBook;
-
+-(void)get_contacts_lists_from_addressBook;
 @end

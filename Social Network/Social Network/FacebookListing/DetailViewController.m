@@ -152,7 +152,21 @@ return  0;
         
         cell.name_label.backgroundColor = [UIColor clearColor];
         
-        NSString*full_name = [NSString stringWithFormat:@"%@ %@",[[app_delegate.device_contact_user_array objectAtIndex: indexPath.row] objectForKey:@"firstName"],[[app_delegate.device_contact_user_array objectAtIndex: indexPath.row] objectForKey:@"lastName"]];
+        NSString*first_name = @"";
+        NSString*last_name = @"";
+        
+        if([[app_delegate.device_contact_user_array objectAtIndex: indexPath.row] objectForKey:@"firstName"]!=nil)
+        {
+            first_name = [[app_delegate.device_contact_user_array objectAtIndex: indexPath.row] objectForKey:@"firstName"];
+        }
+        if([[app_delegate.device_contact_user_array objectAtIndex: indexPath.row] objectForKey:@"lastName"]!=nil)
+        {
+            last_name = [[app_delegate.device_contact_user_array objectAtIndex: indexPath.row] objectForKey:@"lastName"];
+        }
+        
+        
+        NSString*full_name = [NSString stringWithFormat:@"%@ %@",first_name,last_name];
+         
         
         cell.name_label.text = full_name;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -219,14 +233,66 @@ return  0;
 
 
 
-#pragma mark - getUserWhoInstalledMessangerFromContact
+
+#pragma mark - isABAddressBookCreateWithOptionsAvailable
+-(BOOL)isABAddressBookCreateWithOptionsAvailable
+{
+    return &ABAddressBookCreateWithOptions != NULL;
+}
+
+#pragma mark - getContactsFromAddressBook
 -(void)getContactsFromAddressBook
 {
     [app_delegate.device_contact_user_array removeAllObjects];
     
+    
+    
+    ABAddressBookRef addressBook;
+    if ([self isABAddressBookCreateWithOptionsAvailable])
+    {
+        
+        CFErrorRef error_local = nil;
+        addressBook = ABAddressBookCreateWithOptions(NULL,&error_local);
+        ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error)
+                                                 {
+                                                     // callback can occur in background, address book must be accessed on thread it was created on
+                                                     dispatch_async(dispatch_get_main_queue(), ^{
+                                                         if (error_local)
+                                                         {
+                                                             
+                                                         } else if (!granted)
+                                                         {
+                                                             
+                                                         }
+                                                         else
+                                                         {
+                                                             // access granted
+                                                             [self get_contacts_lists_from_addressBook];
+                                                             
+                                                         }
+                                                     });
+                                                 });
+        
+        
+    }
+    else
+    {
+        [self get_contacts_lists_from_addressBook];
+        
+    }
+    
+
+    
+    
+       
+    
+    
+}
+-(void)get_contacts_lists_from_addressBook
+{
     ABAddressBookRef addressBook = ABAddressBookCreate( );
     //NSArray *allPeople = (NSArray *)ABAddressBookCopyPeopleWithName(addressBook, CFSTR("Appleseed"));
-
+    
     
     CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( addressBook );
     
@@ -290,11 +356,9 @@ return  0;
 																	}];
 	[app_delegate.device_contact_user_array sortUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     NSLog(@"allContactsArray  AFTER == %@",app_delegate.device_contact_user_array);
-    
-    
-    
-}
+    [facebook_friends_tableview reloadData];
 
+}
 //Facebook starts
 
 

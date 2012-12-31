@@ -573,8 +573,8 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Abhijit Purohit (4954EM3R67)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Abhijit Purohit (4954EM3R67)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Smitkumar Nebhwani (4J829HWAFZ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Smitkumar Nebhwani (4J829HWAFZ)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -588,8 +588,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PROVISIONING_PROFILE = "97F53104-9B9D-4C36-94BD-7534C9CA14FB";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "97F53104-9B9D-4C36-94BD-7534C9CA14FB";
+				PROVISIONING_PROFILE = "09DDAEFA-9B78-42DE-83A9-77F24C57B097";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "09DDAEFA-9B78-42DE-83A9-77F24C57B097";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -597,8 +597,8 @@
 		46DEA139167E00F5003F3330 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer: Abhijit Purohit (4954EM3R67)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Abhijit Purohit (4954EM3R67)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Smitkumar Nebhwani (4J829HWAFZ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Smitkumar Nebhwani (4J829HWAFZ)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Social Network/Facebook\"",
@@ -608,8 +608,8 @@
 				INFOPLIST_FILE = "Social Network/Social Network-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "97F53104-9B9D-4C36-94BD-7534C9CA14FB";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "97F53104-9B9D-4C36-94BD-7534C9CA14FB";
+				PROVISIONING_PROFILE = "09DDAEFA-9B78-42DE-83A9-77F24C57B097";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "09DDAEFA-9B78-42DE-83A9-77F24C57B097";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
