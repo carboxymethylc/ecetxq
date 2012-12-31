@@ -2,8 +2,8 @@
 //  AppDelegate.m
 //  Social Network
 //
-//  Created by LD.Chirag on 12/16/12.
-//  Copyright (c) 2012 LD.Chirag. All rights reserved.
+//  Created by  on 12/16/12.
+//  Copyright (c) 2012 . All rights reserved.
 //
 
 #import "AppDelegate.h"
