@@ -194,13 +194,21 @@ return  0;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
 {
     
+    NSLog(@"\n %@", [[[app_delegate.device_contact_user_array objectAtIndex:indexPath.row] objectForKey:@"phoneNumber"] objectAtIndex:0]);
+    
+    NSString*phone_number=@"";
+    if([[[app_delegate.device_contact_user_array objectAtIndex:indexPath.row] objectForKey:@"phoneNumber"] objectAtIndex:0]!=nil)
+    {
+        phone_number = [[[app_delegate.device_contact_user_array objectAtIndex:indexPath.row] objectForKey:@"phoneNumber"] objectAtIndex:0];
+    }
+    
     if(indexPath.section ==0)
     {
         MFMessageComposeViewController *controller = [[[MFMessageComposeViewController alloc] init] autorelease];
         if([MFMessageComposeViewController canSendText])
         {
             controller.body = @"I am Using Social Network for IOS.";
-            controller.recipients = [NSArray arrayWithObjects:@"1(234)567-8910", nil];
+            controller.recipients = [NSArray arrayWithObjects:phone_number, nil];
             controller.messageComposeDelegate = self;
             [self presentModalViewController:controller animated:YES];
         }
@@ -359,6 +367,14 @@ return  0;
     [facebook_friends_tableview reloadData];
 
 }
+
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
+{
+    
+    [controller dismissModalViewControllerAnimated:TRUE];
+}
+
 //Facebook starts
 
 
