@@ -35,10 +35,18 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     
-    registration_scrollview.contentSize = CGSizeMake(320,500);
+    registration_scrollview.contentSize = CGSizeMake(320,600);
     [process_activity_indicator stopAnimating];
     process_activity_indicator.hidden = TRUE;
 
+    user_type = 0;
+    
+   // usertype_picker_view.frame = CGRectMake(usertype_picker_view.frame.origin.x,usertype_picker_view.frame.origin.y, usertype_picker_view.frame.size.width,160);
+    
+    user_type_array = [[NSMutableArray alloc] init];
+    [user_type_array addObject:@"Normal User"];
+    [user_type_array addObject:@"Expert User"];
+    [user_type_array addObject:@"Business User"];
     
     [super viewWillAppear:animated];
     
@@ -76,6 +84,10 @@
     {
         error_string = @"Please enter contact number.";
     }
+    else if(user_type==0)
+    {
+        error_string = @"Please select user type.";
+    }
     
     if([error_string length]>0)
     {
@@ -88,7 +100,7 @@
     }
     
     
-    registration_scrollview.contentSize = CGSizeMake(320,500);
+    registration_scrollview.contentSize = CGSizeMake(320,600);
     registration_scrollview.contentOffset = CGPointMake(0,0);
 
     
@@ -184,6 +196,22 @@
 
 -(IBAction)signUp_using_fb_button_clicked:(id)sender
 {
+    NSString*error_string=@"";
+    if(user_type==0)
+    {
+        error_string = @"Please select user type.";
+    }
+    
+    if([error_string length]>0)
+    {
+        
+        UIAlertView*alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:error_string delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alertView show];
+        [alertView release];
+        
+        return;
+    }
+    
     if(![AppDelegate hasConnectivity])
     {
         UIAlertView*alertView = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"Please check your network connection and try again." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
@@ -219,11 +247,53 @@
 
 }
 
+-(IBAction)choose_user_type_button_pressed:(id)sender
+{
+    [self.view endEditing:TRUE];
+    usertype_picker_view.hidden = FALSE;
+}
+
+//Picker view UIPickerViewDataSource 
+#pragma mark - UIPickerViewDataSource
+
+// returns the number of 'columns' to display.
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+// returns the # of rows in each component..
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+        return 3;
+}
+
+#pragma mark - UIPickerViewDelegate
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return [user_type_array objectAtIndex:row];
+}
+#pragma mark - pickerview_done_button_clicked
+-(IBAction)pickerview_done_button_clicked:(id)sender
+{
+    
+   
+    
+    
+    user_type = [usertype_picker selectedRowInComponent:0]+1;
+    [choose_user_type_button setTitle:[user_type_array objectAtIndex:[usertype_picker selectedRowInComponent:0]] forState:UIControlStateNormal];
+    [choose_user_type_button setTitle:[user_type_array objectAtIndex:[usertype_picker selectedRowInComponent:0]] forState:UIControlStateHighlighted];
+    usertype_picker_view.hidden = TRUE;
+    
+    
+}
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     registration_scrollview.contentSize = CGSizeMake(320,700);
     registration_scrollview.contentOffset = CGPointMake(0,120);
+    usertype_picker_view.hidden = TRUE;
     return TRUE;
 }
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -241,7 +311,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     
-    registration_scrollview.contentSize = CGSizeMake(320,500);
+    registration_scrollview.contentSize = CGSizeMake(320,600);
     registration_scrollview.contentOffset = CGPointMake(0,0);
     
     [textField resignFirstResponder];
