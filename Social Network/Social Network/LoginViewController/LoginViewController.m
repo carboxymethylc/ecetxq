@@ -199,7 +199,7 @@
     {
         //[self showLoggedOut];
         //Not logged in...
-        NSArray *permissions = [[NSArray alloc] initWithObjects:@"", nil];
+        NSArray *permissions = [[NSArray alloc] initWithObjects:@"email", nil];
         [[delegate facebook] authorize:permissions];
         [permissions release];
         
