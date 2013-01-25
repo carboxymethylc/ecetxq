@@ -20,6 +20,7 @@ static NSString* kAppId = @"513839955317354";
 @synthesize userPermissions;
 @synthesize facebook_user_array,device_contact_user_array;
 @synthesize user_signed_in_with;
+@synthesize user_defaults;
 - (void)dealloc
 {
     [_window release];

@@ -28,6 +28,8 @@
 @property(nonatomic,retain) NSMutableArray*facebook_user_array;
 @property(nonatomic,retain) NSMutableArray*device_contact_user_array;
 @property(nonatomic,readwrite) int user_signed_in_with;
+@property(nonatomic,retain) NSUserDefaults *user_defaults;
+
 
 
 

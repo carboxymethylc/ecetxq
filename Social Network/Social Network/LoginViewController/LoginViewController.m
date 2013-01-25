@@ -10,6 +10,8 @@
 #import "RegistrationViewController.h"
 #import "DetailViewController.h"
 #import <AddressBook/AddressBook.h>
+#import "AskAQuestionViewController.h"
+
 @interface LoginViewController ()
 
 @end
@@ -58,6 +60,13 @@
 -(IBAction) sign_in_button_clicked:(id)sender
 {
     
+    
+    AskAQuestionViewController*askQuestionViewController = [[AskAQuestionViewController alloc] initWithNibName:@"AskAQuestionViewController" bundle:nil];
+    [self.navigationController pushViewController:askQuestionViewController animated:TRUE];
+    [askQuestionViewController release];
+    return;
+    
+    
     if(![AppDelegate hasConnectivity])
     {
         UIAlertView*alertView = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"Please check your network connection and try again." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
@@ -96,8 +105,8 @@
     loginview_scrollview.contentOffset = CGPointMake(0,0);
     
     
-    requestObjects = [NSArray arrayWithObjects:@"login",email_address_textfield.text,password_textfield.text,nil];
-    requestkeys = [NSArray arrayWithObjects:@"action",@"emailaddress",@"password",nil];
+    requestObjects = [NSArray arrayWithObjects:@"login",email_address_textfield.text,password_textfield.text,@"0",nil];
+    requestkeys = [NSArray arrayWithObjects:@"action",@"emailaddress",@"password",@"profiletype",nil];
    
     
     requestJSONDict = [NSDictionary dictionaryWithObjects:requestObjects forKeys:requestkeys];
@@ -378,7 +387,7 @@
  * (void)request:(FBRequest *)request
  *      didReceiveResponse:(NSURLResponse *)response
  */
-- (void)request:(FBRequest *)request didLoad:(id)result
+- (void)request:(FBRequest *)fb_request didLoad:(id)result
 {
    
         if ([result isKindOfClass:[NSArray class]])
@@ -392,10 +401,94 @@
     
     app_delegate.user_signed_in_with = 2;
     
+    /*
+    
+    NSLog(@"\n user registered/signup using fb..now we need to ");
+    NSLog(@"\n resutl for user = %@",result);
+    
+    NSLog(@"\n resutl for user = %@",[result objectForKey:@"email"]);
+    NSLog(@"\n resutl for user = %@",[result objectForKey:@"first_name"]);
+    NSLog(@"\n resutl for user = %@",[result objectForKey:@"last_name"]);
+    NSLog(@"\n resutl for user = %@",[result objectForKey:@"name"]);
+    
+
+    
+    
+    [app_delegate.user_defaults setObject:[result objectForKey:@"first_name"] forKey:@"firstname"];
+    [app_delegate.user_defaults setObject:[result objectForKey:@"last_name"] forKey:@"lastname"];
+    [app_delegate.user_defaults setObject:[result objectForKey:@"email"] forKey:@"emailaddress"];
+    [app_delegate.user_defaults setObject:[result objectForKey:@"uid"] forKey:@"fb_id"];
+    [app_delegate.user_defaults synchronize];
+
+    
+    
+    loginview_scrollview.contentSize = CGSizeMake(320,500);
+    loginview_scrollview.contentOffset = CGPointMake(0,0);
+    
+    
+    requestObjects = [NSArray arrayWithObjects:@"login",@"",@"",@"1",[result objectForKey:@"uid"],nil];
+    requestkeys = [NSArray arrayWithObjects:@"action",@"emailaddress",@"password",@"profiletype",@"Profiletypeid",nil];
+    
+    
+    requestJSONDict = [NSDictionary dictionaryWithObjects:requestObjects forKeys:requestkeys];
+    //requestString = [NSString stringWithFormat:@"data=%@",[requestJSONDict JSONRepresentation]];
+    requestString = [NSString stringWithFormat:@"%@",[requestJSONDict JSONRepresentation]];
+    NSLog(@"\n \n \n \n \n \n ");
+    
+    NSLog(@"\n requestString = %@",requestString);
+    
+    requestData = [NSData dataWithBytes: [requestString UTF8String] length: [requestString length]];
+    urlString = [NSString stringWithFormat:@"%@Login",WEB_SERVICE_URL];
+    
+    request = [[[NSMutableURLRequest alloc] init] autorelease];
+    [request setURL:[NSURL URLWithString:urlString]]; // set URL for the request
+    [request setHTTPMethod:@"POST"]; // set method the request
+    [request addValue: @"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:requestData];
+    
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
+    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+    
+    process_activity_indicator.hidden = FALSE;
+    [process_activity_indicator startAnimating];
+    [self.view endEditing:TRUE];
+    [self.view setUserInteractionEnabled:FALSE];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)
+     {
+         NSLog(@"\n response we get = %@",response);
+         returnData = data;
+         NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+         NSLog(@"\n returnString == %@",returnString);
+         json = [[SBJSON new] autorelease];
+         
+         
+         responseDataDictionary = [json objectWithString:returnString error:&error];
+         NSLog(@"\n responseDataDictionary = %@",responseDataDictionary);
+         [responseDataDictionary retain];
+         
+         
+         
+         [self performSelectorOnMainThread:@selector(enable_user_interaction) withObject:nil waitUntilDone:TRUE];
+         
+     }];
+    
+    */
+    
+    
+    
     
     DetailViewController*view_controller = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
     [self.navigationController pushViewController:view_controller animated:NO];
     [view_controller release];
+    
+    
+    
+    
+    
     
     /*
         NSUserDefaults*defaults = [NSUserDefaults standardUserDefaults];

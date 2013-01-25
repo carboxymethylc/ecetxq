@@ -36,9 +36,16 @@
     
     
    // facebook_friends_tableview.tableHeaderView = facebook_friends_tableview_header_view;
-    [app_delegate facebook].sessionDelegate = self;
-    facebook_friends_tableview_header_view.backgroundColor = [UIColor clearColor];
-    [self apiFQLIMe];
+    
+    if(app_delegate.user_signed_in_with == 2)
+    {
+        [app_delegate facebook].sessionDelegate = self;
+        facebook_friends_tableview_header_view.backgroundColor = [UIColor clearColor];
+        [self apiFQLIMe];
+    }
+    
+    
+    
     
     
     

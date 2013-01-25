@@ -105,8 +105,8 @@
 
     
     //user_registration
-    requestObjects = [NSArray arrayWithObjects:first_name_textField.text,last_name_textField.text,email_address_name_textField.text,password_textField.text,contact_number_textField.text,[NSNumber numberWithInt:user_type],nil];
-    requestkeys = [NSArray arrayWithObjects:@"firstname",@"lastname",@"emailaddress",@"password",@"contactno",@"usertypeid",nil];
+    requestObjects = [NSArray arrayWithObjects:first_name_textField.text,last_name_textField.text,email_address_name_textField.text,password_textField.text,contact_number_textField.text,[NSNumber numberWithInt:user_type],@"0",nil];
+    requestkeys = [NSArray arrayWithObjects:@"firstname",@"lastname",@"emailaddress",@"password",@"contactno",@"usertypeid",@"profiletype",nil];
     
     
     requestJSONDict = [NSDictionary dictionaryWithObjects:requestObjects forKeys:requestkeys];
@@ -240,9 +240,94 @@
         app_delegate.user_signed_in_with = 2;
         
         
+         NSLog(@"\n first name = %@",[app_delegate.user_defaults objectForKey:@"firstname"]);
+         NSLog(@"\n first name = %@",[app_delegate.user_defaults objectForKey:@"lastname"]);
+         NSLog(@"\n emailaddress = %@",[app_delegate.user_defaults objectForKey:@"emailaddress"]);
+         NSLog(@"\n fb_id  = %@",[app_delegate.user_defaults objectForKey:@"fb_id"]);
+         NSLog(@"\n user_type = %d",user_type);
+        
+        //user_registration
+        
+        requestObjects = [NSArray arrayWithObjects:
+                          [app_delegate.user_defaults objectForKey:@"firstname"],
+                          [app_delegate.user_defaults objectForKey:@"lastname"],
+                          [app_delegate.user_defaults objectForKey:@"emailaddress"],
+                          @"1",
+                          [app_delegate.user_defaults objectForKey:@"fb_id"],
+                          @"",
+                          @"",
+                          [NSNumber numberWithInt:user_type],nil];
+        
+        requestkeys = [NSArray arrayWithObjects:
+                       @"firstname",
+                       @"lastname",
+                       @"emailaddress",
+                       @"profiletype",
+                       @"profileid",
+                       @"password",
+                       @"contactno",
+                       @"usertypeid",nil];
+        
+        
+        requestJSONDict = [NSDictionary dictionaryWithObjects:requestObjects forKeys:requestkeys];
+        requestString = [NSString stringWithFormat:@"%@",[requestJSONDict JSONRepresentation]];
+        NSLog(@"\n \n \n \n \n \n ");
+        
+        NSLog(@"\n requestString = %@",requestString);
+        
+        requestData = [NSData dataWithBytes: [requestString UTF8String] length: [requestString length]];
+        urlString = [NSString stringWithFormat:@"%@%@",WEB_SERVICE_URL,@"Signup"];
+        NSLog(@"\n urlString = %@",urlString);
+        request = [[[NSMutableURLRequest alloc] init] autorelease];
+        [request setURL:[NSURL URLWithString:urlString]]; // set URL for the request
+        [request setHTTPMethod:@"POST"]; // set method the request
+        [request addValue: @"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+        
+        [request setHTTPBody:requestData];
+        
+        
+        
+        process_activity_indicator.hidden = FALSE;
+        [process_activity_indicator startAnimating];
+        [self.view endEditing:TRUE];
+        [self.view setUserInteractionEnabled:FALSE];
+        
+        
+        NSURL *url = [NSURL URLWithString:urlString];
+        
+        NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
+        NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+        
+        [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)
+         {
+             NSLog(@"\n response we get = %@",response);
+             returnData = data;
+             NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+             NSLog(@"\n returnString == %@",returnString);
+             json = [[SBJSON new] autorelease];
+             
+             
+             responseDataDictionary = [json objectWithString:returnString error:&error];
+             [responseDataDictionary retain];
+             
+             app_delegate.user_signed_in_with = 2;
+             
+             NSLog(@"\n responseDataDictionary = %@",responseDataDictionary);
+             
+             NSLog(@"\n data = %@",[[responseDataDictionary objectForKey:@"d"] objectAtIndex:0]);
+             [self performSelectorOnMainThread:@selector(enable_user_interaction) withObject:nil waitUntilDone:TRUE];
+             
+             
+             
+         }];
+        
+        
+        
+        /*
         DetailViewController*view_controller = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
         [self.navigationController pushViewController:view_controller animated:NO];
         [view_controller release];
+         */
         
         
     }
@@ -470,13 +555,35 @@
     
     app_delegate.user_signed_in_with = 2;
     
+    [app_delegate.user_defaults setObject:[result objectForKey:@"first_name"] forKey:@"firstname"];
+    [app_delegate.user_defaults setObject:[result objectForKey:@"last_name"] forKey:@"lastname"];
+    [app_delegate.user_defaults setObject:[result objectForKey:@"email"] forKey:@"emailaddress"];
+    [app_delegate.user_defaults setObject:[result objectForKey:@"uid"] forKey:@"fb_id"];
+    [app_delegate.user_defaults synchronize];
     
     
     
     //user_registration
     
-    requestObjects = [NSArray arrayWithObjects:[result objectForKey:@"first_name"],[result objectForKey:@"last_name"],[result objectForKey:@"email"],@"12345",@"123232",[NSNumber numberWithInt:user_type],nil];
-    requestkeys = [NSArray arrayWithObjects:@"firstname",@"lastname",@"emailaddress",@"password",@"contactno",@"usertypeid",nil];
+    requestObjects = [NSArray arrayWithObjects:
+                      [result objectForKey:@"first_name"],
+                      [result objectForKey:@"last_name"],
+                      [result objectForKey:@"email"],
+                      @"1",
+                      [result objectForKey:@"uid"],
+                      @"",
+                      @"",
+                      [NSNumber numberWithInt:user_type],nil];
+    
+    requestkeys = [NSArray arrayWithObjects:
+                   @"firstname",
+                   @"lastname",
+                   @"emailaddress",
+                   @"profiletype",
+                   @"profileid",
+                   @"password",
+                   @"contactno",
+                   @"usertypeid",nil];
     
     
     requestJSONDict = [NSDictionary dictionaryWithObjects:requestObjects forKeys:requestkeys];
