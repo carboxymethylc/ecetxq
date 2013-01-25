@@ -10,10 +10,13 @@
 
 @interface AskQueCustomCell : UITableViewCell
 {
-   IBOutlet UIView*row1_view;
-    
-    
+    IBOutlet UIView*row1_view;
     IBOutlet UIView*row2_view;
+    IBOutlet UIView*row3_view;
+    IBOutlet UIView*row4_view;
+    IBOutlet UIView*row5_view;
+    
+    
     IBOutlet UITextField*poll_textfield_1;
     IBOutlet UITextField*poll_textfield_2;
     IBOutlet UITextField*poll_textfield_3;
@@ -24,6 +27,9 @@
 }
 @property(nonatomic,retain)   IBOutlet UIView*row1_view;
 @property(nonatomic,retain)   IBOutlet UIView*row2_view;
+@property(nonatomic,retain)   IBOutlet UIView*row3_view;
+@property(nonatomic,retain)   IBOutlet UIView*row4_view;
+@property(nonatomic,retain)   IBOutlet UIView*row5_view;
 
 @property(nonatomic,retain)IBOutlet UITextField*poll_textfield_1;
 @property(nonatomic,retain)IBOutlet UITextField*poll_textfield_2;
