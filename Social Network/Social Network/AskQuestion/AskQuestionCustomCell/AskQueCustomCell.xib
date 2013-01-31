@@ -392,20 +392,26 @@
 										<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 										<int key="IBUIContentHorizontalAlignment">0</int>
 										<int key="IBUIContentVerticalAlignment">0</int>
-										<int key="IBUIButtonType">1</int>
-										<string key="IBUINormalTitle">Button</string>
+										<string key="IBUINormalTitle">Select Category</string>
 										<reference key="IBUIHighlightedTitleColor" ref="821248149"/>
 										<object class="NSColor" key="IBUINormalTitleColor">
 											<int key="NSColorSpace">1</int>
-											<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+											<bytes key="NSRGB">MC40NTg4MjM1Mjk0IDAuNDU4ODIzNTI5NCAwLjQ1ODgyMzUyOTQAA</bytes>
 										</object>
 										<reference key="IBUINormalTitleShadowColor" ref="1002873758"/>
-										<object class="NSCustomResource" key="IBUINormalImage">
+										<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 											<string key="NSClassName">NSImage</string>
 											<string key="NSResourceName">select_category.png</string>
 										</object>
-										<reference key="IBUIFontDescription" ref="487024493"/>
-										<reference key="IBUIFont" ref="850393797"/>
+										<object class="IBUIFontDescription" key="IBUIFontDescription">
+											<int key="type">2</int>
+											<double key="pointSize">12</double>
+										</object>
+										<object class="NSFont" key="IBUIFont">
+											<string key="NSName">Helvetica-Bold</string>
+											<double key="NSSize">12</double>
+											<int key="NSfFlags">16</int>
+										</object>
 									</object>
 								</object>
 								<string key="NSFrameSize">{277, 30}</string>
@@ -744,6 +750,22 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">choose_category</string>
+						<reference key="source" ref="76075731"/>
+						<reference key="destination" ref="25077422"/>
+					</object>
+					<int key="connectionID">137</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">ask_anonymously_button</string>
+						<reference key="source" ref="76075731"/>
+						<reference key="destination" ref="985215694"/>
+					</object>
+					<int key="connectionID">139</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="632960454"/>
 						<reference key="destination" ref="841351856"/>
@@ -784,6 +806,15 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">choose_category_pressed:</string>
+						<reference key="source" ref="25077422"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">136</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">ask_friend_public_pressed:</string>
 						<reference key="source" ref="715867990"/>
 						<reference key="destination" ref="841351856"/>
@@ -799,6 +830,15 @@
 						<int key="IBEventType">7</int>
 					</object>
 					<int key="connectionID">132</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">ask_anonymously_pressed:</string>
+						<reference key="source" ref="985215694"/>
+						<reference key="destination" ref="841351856"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">138</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -1090,7 +1130,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">132</int>
+			<int key="maxID">139</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1102,13 +1142,17 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>ask_anonymously_pressed:</string>
 							<string>ask_friend_public_pressed:</string>
 							<string>btn_choose_photo_video_clicked:</string>
 							<string>btn_createPoll_clicked:</string>
+							<string>choose_category_pressed:</string>
 							<string>toolBar_donePressed:</string>
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -1119,13 +1163,19 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>ask_anonymously_pressed:</string>
 							<string>ask_friend_public_pressed:</string>
 							<string>btn_choose_photo_video_clicked:</string>
 							<string>btn_createPoll_clicked:</string>
+							<string>choose_category_pressed:</string>
 							<string>toolBar_donePressed:</string>
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBActionInfo">
+								<string key="name">ask_anonymously_pressed:</string>
+								<string key="candidateClassName">id</string>
+							</object>
 							<object class="IBActionInfo">
 								<string key="name">ask_friend_public_pressed:</string>
 								<string key="candidateClassName">id</string>
@@ -1136,6 +1186,10 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">btn_createPoll_clicked:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">choose_category_pressed:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
@@ -1152,6 +1206,7 @@
 							<string>ask_que_header_view</string>
 							<string>ask_question_tblView</string>
 							<string>button_choose_image_video</string>
+							<string>category_picker</string>
 							<string>tbl_headerView</string>
 							<string>toolBar</string>
 						</object>
@@ -1161,6 +1216,7 @@
 							<string>UIView</string>
 							<string>UITableView</string>
 							<string>UIButton</string>
+							<string>UIPickerView</string>
 							<string>UIView</string>
 							<string>UIToolbar</string>
 						</object>
@@ -1173,6 +1229,7 @@
 							<string>ask_que_header_view</string>
 							<string>ask_question_tblView</string>
 							<string>button_choose_image_video</string>
+							<string>category_picker</string>
 							<string>tbl_headerView</string>
 							<string>toolBar</string>
 						</object>
@@ -1193,6 +1250,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">button_choose_image_video</string>
 								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">category_picker</string>
+								<string key="candidateClassName">UIPickerView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">tbl_headerView</string>
@@ -1216,8 +1277,10 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>ask_anonymously_button</string>
 							<string>ask_friend</string>
 							<string>ask_publicly</string>
+							<string>choose_category</string>
 							<string>create_poll_button</string>
 							<string>poll_textfield_1</string>
 							<string>poll_textfield_2</string>
@@ -1232,6 +1295,8 @@
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIButton</string>
+							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
@@ -1251,8 +1316,10 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>ask_anonymously_button</string>
 							<string>ask_friend</string>
 							<string>ask_publicly</string>
+							<string>choose_category</string>
 							<string>create_poll_button</string>
 							<string>poll_textfield_1</string>
 							<string>poll_textfield_2</string>
@@ -1268,11 +1335,19 @@
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBToOneOutletInfo">
+								<string key="name">ask_anonymously_button</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
 								<string key="name">ask_friend</string>
 								<string key="candidateClassName">UIButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">ask_publicly</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">choose_category</string>
 								<string key="candidateClassName">UIButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">

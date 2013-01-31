@@ -13,6 +13,8 @@
 @synthesize poll_textfield_1,poll_textfield_2,poll_textfield_3,poll_textfield_4,poll_textfield_5;
 @synthesize create_poll_button;
 @synthesize ask_publicly,ask_friend;
+@synthesize choose_category;
+@synthesize ask_anonymously_button;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -43,6 +45,8 @@
     [ask_publicly release];
     
     [create_poll_button release];
+    [ask_anonymously_button release];
+    
     
     [super dealloc];
 }

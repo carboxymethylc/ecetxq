@@ -17,6 +17,7 @@
 
 @implementation AskAQuestionViewController
 @synthesize ask_que_custom_cell;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -35,6 +36,8 @@
     self.cellNib = [UINib nibWithNibName:@"AskQueCustomCell" bundle:nil];
     // Do any additional setup after loading the view from its nib.
     toolBar.hidden = TRUE;
+    category_picker.hidden = TRUE;
+    
     
     imagePicker = [[UIImagePickerController alloc]init];
 	imagePicker.delegate = self;
@@ -48,7 +51,23 @@
     
     [ask_question_dictionary setObject:[NSString stringWithFormat:@"%d",0] forKey:@"ask_public_friend"];
     
+    
+    category_array = [[NSMutableArray alloc] init];
+    
+    [category_array addObject:@"Category-1"];
+    [category_array addObject:@"Category-2"];
+    [category_array addObject:@"Category-3"];
+    [category_array addObject:@"Category-4"];
+    [category_array addObject:@"Category-5"];
+    [category_array addObject:@"Category-6"];
+    
+    
+    selected_category = -1;
+    
     NSLog(@"\n tableview content size = %@",NSStringFromCGSize(ask_question_tblView.contentSize));
+    
+    
+     [ask_question_dictionary setObject:[NSNumber numberWithInt:0] forKey:@"ask_anonymously"];
     
 }
 
@@ -190,6 +209,16 @@
         case 2:
         {
 
+            if(selected_category == -1)
+            {
+                [cell.choose_category setTitle:@"Select Category" forState:UIControlStateNormal];
+            }
+            else
+            {
+                
+              [cell.choose_category setTitle:[category_array objectAtIndex:selected_category] forState:UIControlStateNormal];
+            }
+            
              cell.row3_view.hidden = FALSE;
              break;
             
@@ -465,6 +494,7 @@
 -(IBAction)toolBar_donePressed:(id)sender
 {
     toolBar.hidden = TRUE;
+    category_picker.hidden = TRUE;
     [self.view endEditing:TRUE];
 }
 
@@ -481,7 +511,64 @@
     
 }
 
+#pragma mark -
+#pragma mark choose_category_pressed
+-(IBAction)choose_category_pressed:(id)sender
+{
+    toolBar.hidden = FALSE;
+    category_picker.hidden = FALSE;
+    
+}
 
+
+// returns the number of 'columns' to display.
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+
+// returns the # of rows in each component..
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [category_array count] ;
+}
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return [category_array objectAtIndex:row];
+    
+}
+
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    NSLog(@"\n row = %d",row);
+    selected_category = row;
+    
+    [ask_question_tblView reloadData];
+    
+
+    
+}
+
+#pragma mark - ask_anonymously_pressed
+#pragma mark -
+
+-(IBAction)ask_anonymously_pressed:(id)sender
+{
+    [ask_question_dictionary setObject:[NSNumber numberWithInt:0] forKey:@"ask_anonymously"];
+    if([[ask_question_dictionary objectForKey:@"ask_anonymously"] intValue]==0)
+    {
+        [ask_question_dictionary setObject:[NSNumber numberWithInt:1] forKey:@"ask_anonymously"];
+    }
+    else
+    {
+        [ask_question_dictionary setObject:[NSNumber numberWithInt:0] forKey:@"ask_anonymously"];
+    }
+    
+    [ask_question_tblView reloadData];
+}
+
+#pragma mark -
 -(void)dealloc
 {
     [imagePicker release];

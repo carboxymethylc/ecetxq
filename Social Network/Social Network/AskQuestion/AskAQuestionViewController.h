@@ -9,7 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "AskQueCustomCell.h"
 #import <MediaPlayer/MediaPlayer.h>
-@interface AskAQuestionViewController : UIViewController<UINavigationControllerDelegate,UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate>
+@interface AskAQuestionViewController : UIViewController
+<
+    UINavigationControllerDelegate,
+    UITableViewDataSource,
+    UITableViewDelegate,
+    UITextFieldDelegate,
+    UITextViewDelegate,
+    UIImagePickerControllerDelegate,
+    UIActionSheetDelegate,
+    UIPickerViewDataSource,
+    UIPickerViewDelegate
+>
 {
     IBOutlet UITableView*ask_question_tblView;
     IBOutlet UIView*ask_que_header_view;
@@ -22,7 +33,11 @@
     
     
     UIImagePickerController *imagePicker;
+    IBOutlet UIPickerView*category_picker;
     
+    NSMutableArray*category_array;
+    int selected_category;
+
     
 }
 
@@ -34,7 +49,8 @@
 -(IBAction)toolBar_donePressed:(id)sender;
 
 -(IBAction)ask_friend_public_pressed:(id)sender;
-
+-(IBAction)choose_category_pressed:(id)sender;
+-(IBAction)ask_anonymously_pressed:(id)sender;
 
 
 

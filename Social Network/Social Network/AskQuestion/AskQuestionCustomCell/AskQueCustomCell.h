@@ -30,6 +30,9 @@
     IBOutlet UIButton*ask_publicly;//Tag 4001
     IBOutlet UIButton*ask_friend;//4002
     
+     IBOutlet UIButton*choose_category;
+    
+    IBOutlet UIButton*ask_anonymously_button;
     
  
 }
@@ -54,6 +57,9 @@
 @property(nonatomic,retain)IBOutlet UIButton*ask_publicly;
 @property(nonatomic,retain)IBOutlet UIButton*ask_friend;
 
+@property(nonatomic,retain) IBOutlet UIButton*choose_category;
 
+
+@property(nonatomic,retain)  IBOutlet UIButton*ask_anonymously_button;
 
 @end
